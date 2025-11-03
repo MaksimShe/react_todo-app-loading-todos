@@ -1,4 +1,5 @@
-import { Todo, USER_ID } from '../types';
+import { USER_ID } from '../App';
+import { Todo } from '../types';
 import { client } from '../utils/fetchClient';
 
 export const getTodos = () => {

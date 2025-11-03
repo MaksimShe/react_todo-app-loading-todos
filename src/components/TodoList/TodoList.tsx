@@ -4,13 +4,13 @@ import cn from 'classnames';
 
 export type Props = {
   filteredTodos: Todo[];
-  handleCheckTodo: (id: number) => void;
+  handleOnCheckTodo: (id: number) => void;
   isLoading: boolean;
 };
 
 export const TodoList: React.FC<Props> = ({
   filteredTodos,
-  handleCheckTodo,
+  handleOnCheckTodo,
   isLoading,
 }) => {
   return (
@@ -28,7 +28,7 @@ export const TodoList: React.FC<Props> = ({
                 type="checkbox"
                 className="todo__status"
                 checked={todo.completed}
-                onChange={() => handleCheckTodo(todo.id)}
+                onChange={() => handleOnCheckTodo(todo.id)}
               />
             </label>
 

@@ -2,12 +2,12 @@ import classNames from 'classnames';
 
 type Props = {
   currentError: string | null;
-  handleHideError: () => void;
+  handleOnHideError: () => void;
 };
 
 export const ErrorNotification: React.FC<Props> = ({
   currentError,
-  handleHideError,
+  handleOnHideError,
 }) => {
   return (
     <div
@@ -21,7 +21,7 @@ export const ErrorNotification: React.FC<Props> = ({
         data-cy="HideErrorButton"
         type="button"
         className="delete"
-        onClick={handleHideError}
+        onClick={handleOnHideError}
       />
       {currentError}
     </div>

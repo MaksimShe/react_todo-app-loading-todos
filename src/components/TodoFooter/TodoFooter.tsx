@@ -3,23 +3,23 @@ import { FilterStatus, Todo } from '../../types';
 
 export type Props = {
   todos: Todo[];
-  quantityActiveTasks: number;
+  quantityTasksActive: number;
   activeFilterStatus: string;
-  handleChangeFilter: (type: FilterStatus) => void;
-  handleDeleteAllTodos: () => void;
+  handleOnChangeFilter: (type: FilterStatus) => void;
+  handleOnDeleteAllTodos: () => void;
 };
 
 export const TodoFooter: React.FC<Props> = ({
   todos,
-  quantityActiveTasks,
+  quantityTasksActive,
   activeFilterStatus,
-  handleChangeFilter,
-  handleDeleteAllTodos,
+  handleOnChangeFilter,
+  handleOnDeleteAllTodos,
 }) => {
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
-        {`${quantityActiveTasks} items left`}
+        {`${quantityTasksActive} items left`}
       </span>
 
       <nav className="filter" data-cy="Filter">
@@ -29,7 +29,7 @@ export const TodoFooter: React.FC<Props> = ({
             selected: activeFilterStatus === FilterStatus.All,
           })}
           data-cy="FilterLinkAll"
-          onClick={() => handleChangeFilter(FilterStatus.All)}
+          onClick={() => handleOnChangeFilter(FilterStatus.All)}
         >
           All
         </a>
@@ -40,7 +40,7 @@ export const TodoFooter: React.FC<Props> = ({
             selected: activeFilterStatus === FilterStatus.Active,
           })}
           data-cy="FilterLinkActive"
-          onClick={() => handleChangeFilter(FilterStatus.Active)}
+          onClick={() => handleOnChangeFilter(FilterStatus.Active)}
         >
           Active
         </a>
@@ -51,7 +51,7 @@ export const TodoFooter: React.FC<Props> = ({
             selected: activeFilterStatus === FilterStatus.Completed,
           })}
           data-cy="FilterLinkCompleted"
-          onClick={() => handleChangeFilter(FilterStatus.Completed)}
+          onClick={() => handleOnChangeFilter(FilterStatus.Completed)}
         >
           Completed
         </a>
@@ -61,8 +61,8 @@ export const TodoFooter: React.FC<Props> = ({
         type="button"
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
-        disabled={quantityActiveTasks === todos.length}
-        onClick={() => handleDeleteAllTodos()}
+        disabled={quantityTasksActive === todos.length}
+        onClick={() => handleOnDeleteAllTodos()}
       >
         Clear completed
       </button>

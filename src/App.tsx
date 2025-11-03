@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { UserWarning } from './UserWarning';
 import { getTodos } from './api/todos';
 import { FilterStatus, ErrorMessages } from './types';
-import { Todo, USER_ID } from './types';
+import { Todo } from './types';
 import { TodoHeader } from './components/TodoHeader';
 import { TodoFooter } from './components/TodoFooter';
 import { TodoList } from './components/TodoList';
 import { filterTodos } from './utils/fiterTodos';
 import { ErrorNotification } from './components/ErrorNotification';
+
+export const USER_ID = 3653;
 
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -61,9 +63,9 @@ export const App: React.FC = () => {
     );
   };
 
-  const quantityActiveTasks = (): number => {
-    return preparedTodos.filter(todo => !todo.completed).length;
-  };
+  const quantityTasksActive = preparedTodos.filter(
+    todo => !todo.completed,
+  ).length;
 
   return (
     <div className="todoapp">
@@ -71,31 +73,30 @@ export const App: React.FC = () => {
 
       <div className="todoapp__content">
         <TodoHeader
-          quantityActiveTasks={quantityActiveTasks()}
+          quantityTasksActive={quantityTasksActive}
           todos={preparedTodos}
-          loadingTodos={[]}
         />
 
         <TodoList
           filteredTodos={filteredTodos}
-          handleCheckTodo={handleCheckTodo}
+          handleOnCheckTodo={handleCheckTodo}
           isLoading={isLoading}
         />
 
         {preparedTodos.length > 0 && (
           <TodoFooter
             todos={preparedTodos}
-            quantityActiveTasks={quantityActiveTasks()}
+            quantityTasksActive={quantityTasksActive}
             activeFilterStatus={activeFilterStatus}
-            handleChangeFilter={handleChangeFilter}
-            handleDeleteAllTodos={() => setPreparedTodos([])}
+            handleOnChangeFilter={handleChangeFilter}
+            handleOnDeleteAllTodos={() => setPreparedTodos([])}
           />
         )}
       </div>
 
       <ErrorNotification
         currentError={currentError}
-        handleHideError={handleHideError}
+        handleOnHideError={handleHideError}
       />
     </div>
   );
